@@ -20,4 +20,14 @@ public class CustomerController {
         return customerRepository.getAllCustomers();
     }
 
+    /*
+    This adds a new customer.
+    It takes the new customer from the body of the request.
+   */
+    @RequestMapping(value="/api/customers", method = RequestMethod.POST)
+    public Boolean addNewCustomer(@RequestBody Customer customer){
+        return customerRepository.addCustomer(customer);
+    }
+
+
 }

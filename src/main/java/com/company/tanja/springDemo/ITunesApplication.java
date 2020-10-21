@@ -59,6 +59,41 @@ public class ITunesApplication {
 		return customers;
 	}
 
+	public Boolean addCustomer(Customer customer){
+		Boolean success = false;
+		try{
+			// Connect to DB
+			conn = DriverManager.getConnection(URL);
+			logger.log("Connection to SQLite has been established.");
+
+			// Make SQL query
+			PreparedStatement preparedStatement =
+					conn.prepareStatement("INSERT INTO customer(customerId, firstName, lastName, country, postalCode, phone, email) VALUES(?,?,?,?,?,?,?)");
+			preparedStatement.setInt(1,customer.getCustomerId());
+			preparedStatement.setString(2,customer.getFirstName());
+			preparedStatement.setString(3,customer.getLastName());
+			preparedStatement.setString(4,customer.getCountry());
+			preparedStatement.setString(5,customer.getPostalCode());
+			preparedStatement.setString(6,customer.getPhone());
+			preparedStatement.setString(7,customer.getEmail());
+			// Execute Query
+			int result = preparedStatement.executeUpdate();
+			success = (result != 0);
+			logger.log("Add customer successful");
+		}
+		catch (Exception exception){
+			logger.log(exception.toString());
+		}
+		finally {
+			try {
+				conn.close();
+			}
+			catch (Exception exception){
+				logger.log(exception.toString());
+			}
+		}
+		return success;
+	}
 
 
 	public static void main(String[] args) {
