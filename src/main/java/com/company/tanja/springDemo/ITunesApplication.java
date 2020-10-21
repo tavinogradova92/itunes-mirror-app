@@ -27,20 +27,20 @@ public class ITunesApplication {
 
 			// Make SQL query
 			PreparedStatement preparedStatement =
-					conn.prepareStatement("SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM customer");
+					conn.prepareStatement("SELECT customerId, firstName, lastName, country, postalCode, phone, email FROM customer");
 			// Execute Query
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 				customers.add(
 						new Customer(
-								resultSet.getInt("CustomerId"),
-								resultSet.getString("FirstName"),
-								resultSet.getString("LastName"),
-								resultSet.getString("Country"),
-								resultSet.getString("PostalCode"),
-								resultSet.getString("Phone"),
-								resultSet.getString("Email")
+								resultSet.getInt("customerId"),
+								resultSet.getString("firstName"),
+								resultSet.getString("lastName"),
+								resultSet.getString("country"),
+								resultSet.getString("postalCode"),
+								resultSet.getString("phone"),
+								resultSet.getString("email")
 						));
 			}
 			logger.log("Select all customers successful");

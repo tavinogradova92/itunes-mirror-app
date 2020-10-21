@@ -1,81 +1,81 @@
 package com.company.tanja.springDemo.models;
 
 public class Customer {
-    private int CustomerId;
-    private String FirstName;
-    private String LastName;
-    private String Country;
-    private String PostalCode;
-    private String Phone;
-    private String Email;
+    private int customerId;
+    private String firstName;
+    private String lastName;
+    private String country;
+    private String postalCode;
+    private String phone;
+    private String email;
 
     public Customer() {
     }
 
     public int getCustomerId() {
-        return CustomerId;
+        return customerId;
     }
 
     public void setCustomerId(int customerId) {
-        this.CustomerId = customerId;
+        this.customerId = customerId;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        this.LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        this.Country = country;
+        this.country = country;
     }
 
     public String getPostalCode() {
-        return PostalCode;
+        return postalCode;
     }
 
     public void setPostalCode(String postalCode) {
-        this.PostalCode = postalCode;
+        this.postalCode = postalCode;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        this.Phone = phone;
+        this.phone = phone;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String email) {
-        this.Email = email;
+    public void setEmail(String Email) {
+        this.email = email;
     }
 
-    public Customer(int CustomerId, String FirstName, String LastName, String Country, String PostalCode, String Phone, String Email) {
-        this.CustomerId = CustomerId;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Country = Country;
-        this.PostalCode = PostalCode;
-        this.Phone = Phone;
-        this.Email = Email;
+    public Customer(int customerId, String firstName, String lastName, String country, String postalCode, String phone, String email) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.email = email;
     }
 
 

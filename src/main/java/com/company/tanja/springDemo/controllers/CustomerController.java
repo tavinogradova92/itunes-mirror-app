@@ -13,8 +13,7 @@ public class CustomerController {
     private ITunesApplication customerRepository = new ITunesApplication();
 
     /*
-     This first one just returns all the customers in the database
-     it will return a CustomerShort object.
+     This function just returns all the customers in the database
     */
     @RequestMapping(value="/api/customers", method = RequestMethod.GET)
     public ArrayList<Customer> getAllCustomers(){
