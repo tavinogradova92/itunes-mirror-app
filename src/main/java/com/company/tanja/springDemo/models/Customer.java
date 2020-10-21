@@ -1,52 +1,85 @@
 package com.company.tanja.springDemo.models;
 
 public class Customer {
-    private String customerId;
-    private String companyName;
-    private String contactName;
-    private String phone;
+    private int CustomerId;
+    private String FirstName;
+    private String LastName;
+    private String Country;
+    private String PostalCode;
+    private String Phone;
+    private String Email;
 
     public Customer() {
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public int getCustomerId() {
+        return CustomerId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(int customerId) {
+        this.CustomerId = customerId;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getFirstName() {
+        return FirstName;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setFirstName(String firstName) {
+        this.FirstName = firstName;
     }
 
-    public String getContactName() {
-        return contactName;
+    public String getLastName() {
+        return LastName;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public void setLastName(String lastName) {
+        this.LastName = lastName;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String country) {
+        this.Country = country;
+    }
+
+    public String getPostalCode() {
+        return PostalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.PostalCode = postalCode;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.Phone = phone;
     }
 
-    public Customer(String customerId, String companyName, String contactName, String phone) {
-        this.customerId = customerId;
-        this.companyName = companyName;
-        this.contactName = contactName;
-        this.phone = phone;
+    public String getEmail() {
+        return Email;
     }
+
+    public void setEmail(String email) {
+        this.Email = email;
+    }
+
+    public Customer(int CustomerId, String FirstName, String LastName, String Country, String PostalCode, String Phone, String Email) {
+        this.CustomerId = CustomerId;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.Country = Country;
+        this.PostalCode = PostalCode;
+        this.Phone = Phone;
+        this.Email = Email;
+    }
+
+
+
 
 
 }
