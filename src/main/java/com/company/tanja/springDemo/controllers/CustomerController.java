@@ -14,8 +14,7 @@ public class CustomerController {
 
     private ITunesApplication customerRepository = new ITunesApplication();
 
-
-    // This function just returns all the customers in the database
+    // This function returns all the customers in the database
     @RequestMapping(value="/api/customers", method = RequestMethod.GET)
     public ArrayList<Customer> getAllCustomers(){
         return customerRepository.getAllCustomers();
@@ -27,10 +26,7 @@ public class CustomerController {
         return customerRepository.addCustomer(customer);
     }
 
-    /* This updates an existing customer.
-     It takes the new customer data from the body of the request.
-     As well as taking the Id of the customer from the path variables, this is
-     to do a check if the body matches the id. */
+    // This updates an existing customer.
     @RequestMapping(value = "/api/customers/{id}", method = RequestMethod.PUT)
     public Boolean updateExistingCustomer(@PathVariable String id, @RequestBody Customer customer){
         return customerRepository.updateCustomer(customer);
