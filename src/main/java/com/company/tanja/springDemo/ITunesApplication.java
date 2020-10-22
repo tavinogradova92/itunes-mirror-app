@@ -1,4 +1,5 @@
 package com.company.tanja.springDemo;
+import com.company.tanja.springDemo.controllers.CustomersSpendingMax;
 import com.company.tanja.springDemo.logging.LogToConsole;
 import com.company.tanja.springDemo.models.Customer;
 
@@ -138,6 +139,7 @@ public class ITunesApplication {
 		}
 		return success;
 	}
+
 	// counting the number of customers per country in a descending order
 	public ArrayList<CustomersPerCountry> countAmountPerCountry(){
 		ArrayList<CustomersPerCountry> customerPerCountry = new ArrayList<>();
@@ -173,6 +175,45 @@ public class ITunesApplication {
 			}
 		}
 		return customerPerCountry;
+	}
+
+	// choosing how much each of the customer spent in a descending order
+	public ArrayList<CustomersSpendingMax> countSumSpentPerCustomer(){
+		ArrayList<CustomersSpendingMax> customerSpendingMax = new ArrayList<>();
+		try{
+			// Connect to DB
+			conn = DriverManager.getConnection(URL);
+			logger.log("Connection to SQLite has been established.");
+
+			// Make SQL query
+			PreparedStatement preparedStatement =
+					conn.prepareStatement("SELECT customer.customerId, customer.firstName, customer.lastName, invoice.total FROM customer LEFT JOIN invoice ON customer.customerId = invoice.customerId ORDER BY invoice.total DESC");
+			// Execute Query
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				customerSpendingMax.add(
+						new CustomersSpendingMax(
+								resultSet.getInt("customerId"),
+								resultSet.getString("firstName"),
+								resultSet.getString("lastName"),
+								resultSet.getInt("total")
+						));
+			}
+			logger.log("Show amount of customers per country done successfully");
+		}
+		catch (Exception exception){
+			logger.log(exception.toString());
+		}
+		finally {
+			try {
+				conn.close();
+			}
+			catch (Exception exception){
+				logger.log(exception.toString());
+			}
+		}
+		return customerSpendingMax;
 	}
 
 

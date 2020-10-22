@@ -42,5 +42,11 @@ public class CustomerController {
         return customerRepository.countAmountPerCountry();
     }
 
+    // This function returns the amount of money spent by each customer in a descending order
+    @RequestMapping(value="/api/customers/spent", method = RequestMethod.GET)
+    public ArrayList<CustomersSpendingMax> countSumSpentPerCustomer(){
+        return customerRepository.countSumSpentPerCustomer();
+    }
+
 
 }
