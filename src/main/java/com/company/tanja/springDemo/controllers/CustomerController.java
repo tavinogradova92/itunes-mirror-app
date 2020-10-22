@@ -2,6 +2,7 @@ package com.company.tanja.springDemo.controllers;
 
 import com.company.tanja.springDemo.ITunesApplication;
 import com.company.tanja.springDemo.models.Customer;
+import com.company.tanja.springDemo.models.CustomersPerCountry;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,9 +36,9 @@ public class CustomerController {
         return customerRepository.updateCustomer(customer);
     }
 
-    // This function returns the amount of customers per country
+    // This function returns the amount of customers per country in a descending order
     @RequestMapping(value="/api/customers/country", method = RequestMethod.GET)
-    public Map<String, Integer> countAmountPerCountry(){
+    public ArrayList<CustomersPerCountry> countAmountPerCountry(){
         return customerRepository.countAmountPerCountry();
     }
 

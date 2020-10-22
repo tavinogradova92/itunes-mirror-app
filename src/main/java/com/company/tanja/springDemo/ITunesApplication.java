@@ -2,6 +2,7 @@ package com.company.tanja.springDemo;
 import com.company.tanja.springDemo.logging.LogToConsole;
 import com.company.tanja.springDemo.models.Customer;
 
+import com.company.tanja.springDemo.models.CustomersPerCountry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.Connection;
@@ -138,8 +139,8 @@ public class ITunesApplication {
 		return success;
 	}
 	// counting the number of customers per country in a descending order
-	public Map<String, Integer> countAmountPerCountry(){
-		Map<String, Integer> customersPerCountry = new HashMap<String, Integer>();
+	public ArrayList<CustomersPerCountry> countAmountPerCountry(){
+		ArrayList<CustomersPerCountry> customerPerCountry = new ArrayList<>();
 		try{
 			// Connect to DB
 			conn = DriverManager.getConnection(URL);
@@ -147,15 +148,16 @@ public class ITunesApplication {
 
 			// Make SQL query
 			PreparedStatement preparedStatement =
-					conn.prepareStatement("SELECT country, COUNT(*) AS number_by_country FROM customer GROUP BY country ORDER BY COUNT(*) DESC");
+					conn.prepareStatement("SELECT country, COUNT(*) AS numberByCountry FROM customer GROUP BY country ORDER BY numberByCountry DESC");
 			// Execute Query
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				customersPerCountry.put(
+				customerPerCountry.add(
+						new CustomersPerCountry(
 								resultSet.getString("country"),
-								resultSet.getInt("number_by_country")
-						);
+								resultSet.getInt("numberByCountry")
+						));
 			}
 			logger.log("Show amount of customers per country done successfully");
 		}
@@ -170,7 +172,7 @@ public class ITunesApplication {
 				logger.log(exception.toString());
 			}
 		}
-		return customersPerCountry;
+		return customerPerCountry;
 	}
 
 
