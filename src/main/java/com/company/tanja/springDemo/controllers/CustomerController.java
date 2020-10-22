@@ -1,6 +1,6 @@
 package com.company.tanja.springDemo.controllers;
 
-import com.company.tanja.springDemo.ITunesApplication;
+import com.company.tanja.springDemo.data_access.CustomerAPIRequests;
 import com.company.tanja.springDemo.models.Customer;
 import com.company.tanja.springDemo.models.CustomersPerCountry;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CustomerController {
 
-    private ITunesApplication customerRepository = new ITunesApplication();
+    private CustomerAPIRequests customerRepository = new CustomerAPIRequests();
 
     // This function returns all the customers in the database
     @RequestMapping(value="/api/customers", method = RequestMethod.GET)
