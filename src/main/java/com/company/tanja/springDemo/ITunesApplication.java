@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 public class ITunesApplication {
@@ -18,6 +21,7 @@ public class ITunesApplication {
 	public static ArrayList<Customer> customers = new ArrayList<Customer>();
 	private LogToConsole logger = new LogToConsole();
 
+	// getting the list of all the customers as an array
 	public ArrayList<Customer> getAllCustomers(){
 		ArrayList<Customer> customers = new ArrayList<>();
 		try{
@@ -59,6 +63,7 @@ public class ITunesApplication {
 		return customers;
 	}
 
+	// adding a new customer to the array
 	public Boolean addCustomer(Customer customer){
 		Boolean success = false;
 		try{
@@ -95,6 +100,7 @@ public class ITunesApplication {
 		return success;
 	}
 
+	// updating data of an existing customer in an array
 	public Boolean updateCustomer(Customer customer){
 		Boolean success = false;
 		try{
@@ -131,13 +137,45 @@ public class ITunesApplication {
 		}
 		return success;
 	}
+	// counting the number of customers per country in a descending order
+	public Map<String, Integer> countAmountPerCountry(){
+		Map<String, Integer> customersPerCountry = new HashMap<String, Integer>();
+		try{
+			// Connect to DB
+			conn = DriverManager.getConnection(URL);
+			logger.log("Connection to SQLite has been established.");
 
+			// Make SQL query
+			PreparedStatement preparedStatement =
+					conn.prepareStatement("SELECT country, COUNT(*) AS number_by_country FROM customer GROUP BY country ORDER BY COUNT(*) DESC");
+			// Execute Query
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				customersPerCountry.put(
+								resultSet.getString("country"),
+								resultSet.getInt("number_by_country")
+						);
+			}
+			logger.log("Show amount of customers per country done successfully");
+		}
+		catch (Exception exception){
+			logger.log(exception.toString());
+		}
+		finally {
+			try {
+				conn.close();
+			}
+			catch (Exception exception){
+				logger.log(exception.toString());
+			}
+		}
+		return customersPerCountry;
+	}
 
 
 	public static void main(String[] args) {
 		SpringApplication.run(ITunesApplication.class, args);
 	}
-
-
 
 }

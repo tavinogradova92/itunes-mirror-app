@@ -5,6 +5,7 @@ import com.company.tanja.springDemo.models.Customer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 
@@ -32,6 +33,12 @@ public class CustomerController {
     @RequestMapping(value = "/api/customers/{id}", method = RequestMethod.PUT)
     public Boolean updateExistingCustomer(@PathVariable String id, @RequestBody Customer customer){
         return customerRepository.updateCustomer(customer);
+    }
+
+    // This function returns the amount of customers per country
+    @RequestMapping(value="/api/customers/country", method = RequestMethod.GET)
+    public Map<String, Integer> countAmountPerCountry(){
+        return customerRepository.countAmountPerCountry();
     }
 
 
