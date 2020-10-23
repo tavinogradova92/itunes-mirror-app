@@ -1,4 +1,4 @@
-package com.company.tanja.springDemo.controllers;
+package com.company.tanja.springDemo.models;
 
 public class CustomersSpendingMax {
 

@@ -3,10 +3,10 @@ package com.company.tanja.springDemo.controllers;
 import com.company.tanja.springDemo.data_access.CustomerAPIRequests;
 import com.company.tanja.springDemo.models.Customer;
 import com.company.tanja.springDemo.models.CustomersPerCountry;
+import com.company.tanja.springDemo.models.CustomersSpendingMax;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 @RestController
 

@@ -1,6 +1,6 @@
 package com.company.tanja.springDemo.data_access;
 
-import com.company.tanja.springDemo.controllers.CustomersSpendingMax;
+import com.company.tanja.springDemo.models.CustomersSpendingMax;
 import com.company.tanja.springDemo.logging.LogToConsole;
 import com.company.tanja.springDemo.models.Customer;
 import com.company.tanja.springDemo.models.CustomersPerCountry;
