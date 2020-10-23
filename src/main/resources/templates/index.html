@@ -2,13 +2,24 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset = "ISO-8859-1" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <link href = "css/styles.css" rel = "stylesheet"/>
     <title>Spring Boot Application</title>
 </head>
+
 <body>
 <h4>Welcome to Thymeleaf Spring Boot web application</h4>
 <div th:text="${artists}">Hello</div>
 <div th:text="${songs}">Hello</div>
 <div th:text="${genres}">Hello</div>
+<br>
+<form class="form-inline" action="#" th:action="@{search/(query='searchterm')}">
+    <input class="form-control" type="search" th:name="searchterm" placeholder="Search" aria-label="Search">
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+<script th:src="@{/js/bootstrap.min.js}" ></script>
 </body>
+
 </html>
