@@ -14,11 +14,17 @@ public class WebController {
 
     private WebRequests webRequests = new WebRequests();
 
-    @RequestMapping(value = "index.html", method = RequestMethod.GET)
-    public String showRandomArtists(Model model) {
+    // showing five random artists, songs and genres
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String showRandomStaff(Model model) {
         ArrayList<String> artists = webRequests.getRandomArtists();
+        ArrayList<String> songs = webRequests.getRandomSongs();
+        ArrayList<String> genres = webRequests.getRandomGenres();
         model.addAttribute("artists", artists);
+        model.addAttribute("songs", songs);
+        model.addAttribute("genres", genres);
         return "index";
     }
+
 
 }

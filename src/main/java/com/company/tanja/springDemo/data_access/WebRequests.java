@@ -35,7 +35,7 @@ public class WebRequests {
                                 resultSet.getString("name")
                         );
             }
-            logger.log("Select all customers successful");
+            logger.log("Select five random artists successful");
         } catch (Exception exception) {
             logger.log(exception.toString());
         } finally {
@@ -46,5 +46,69 @@ public class WebRequests {
             }
         }
         return randomArtists;
+    }
+
+    // getting five random artists
+    public ArrayList<String> getRandomSongs() {
+        ArrayList<String> randomSongs = new ArrayList<>();
+        try {
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            logger.log("Connection to SQLite has been established.");
+
+            // Make SQL query
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement("SELECT name FROM track ORDER BY RANDOM() LIMIT 5");
+            // Execute Query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                randomSongs.add(
+                        resultSet.getString("name")
+                );
+            }
+            logger.log("Select five random songs successful");
+        } catch (Exception exception) {
+            logger.log(exception.toString());
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception exception) {
+                logger.log(exception.toString());
+            }
+        }
+        return randomSongs;
+    }
+
+    // getting five random genres
+    public ArrayList<String> getRandomGenres() {
+        ArrayList<String> randomGenres = new ArrayList<>();
+        try {
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            logger.log("Connection to SQLite has been established.");
+
+            // Make SQL query
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement("SELECT name FROM genre ORDER BY RANDOM() LIMIT 5");
+            // Execute Query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                randomGenres.add(
+                        resultSet.getString("name")
+                );
+            }
+            logger.log("Select five random genres successful");
+        } catch (Exception exception) {
+            logger.log(exception.toString());
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception exception) {
+                logger.log(exception.toString());
+            }
+        }
+        return randomGenres;
     }
 }
