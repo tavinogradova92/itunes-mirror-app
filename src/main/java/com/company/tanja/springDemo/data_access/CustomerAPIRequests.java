@@ -1,14 +1,12 @@
 package com.company.tanja.springDemo.data_access;
 
+import com.company.tanja.springDemo.models.CustomerFavouriteGenre;
 import com.company.tanja.springDemo.models.CustomersSpendingMax;
 import com.company.tanja.springDemo.logging.LogToConsole;
 import com.company.tanja.springDemo.models.Customer;
 import com.company.tanja.springDemo.models.CustomersPerCountry;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -196,4 +194,60 @@ public class CustomerAPIRequests {
         }
         return customerSpendingMax;
     }
+
+    // The function returns the customer's most popular genre (or two if both are popular)
+    public CustomerFavouriteGenre getCustomersFavouriteGenre(int customerId) {
+        CustomerFavouriteGenre favouriteGenres = null;
+        try {
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            logger.log("Connection to SQLite has been established.");
+            // Make SQL query
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "SELECT customerId, FirstName, LastName, Name " +
+                            "AS Genre FROM (SELECT Customer.CustomerId, Customer.FirstName, LastName, G.Name, " +
+                            "COUNT(G.Name) AS Number FROM Customer " +
+                            "LEFT JOIN Invoice I on Customer.CustomerId = I.CustomerId " +
+                            "LEFT JOIN InvoiceLine IL on I.InvoiceId = IL.InvoiceId " +
+                            "LEFT JOIN Track T on T.TrackId = IL.TrackId " +
+                            "LEFT JOIN Genre G on G.GenreId = T.GenreId " +
+                            "WHERE Customer.CustomerId = ? " +
+                            "GROUP BY G.Name " +
+                            "ORDER BY Number DESC) " +
+                            "WHERE Number = (SELECT MAX(Number) FROM (SELECT G.Name, COUNT(G.Name) " +
+                            "AS Number FROM Customer " +
+                            "LEFT JOIN Invoice I on Customer.CustomerId = I.CustomerId " +
+                            "LEFT JOIN InvoiceLine IL on I.InvoiceId = IL.InvoiceId " +
+                            "LEFT JOIN Track T on T.TrackId = IL.TrackId " +
+                            "LEFT JOIN Genre G on G.GenreId = T.GenreId " +
+                            "WHERE Customer.CustomerId = ? " +
+                            "GROUP BY G.Name " +
+                            "ORDER BY Number DESC))");
+            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(2, customerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                favouriteGenres = new CustomerFavouriteGenre(resultSet.getInt("customerId"), resultSet.getString("FirstName"), resultSet.getString("LastName"), new ArrayList<>());
+            }
+
+            do {
+                favouriteGenres.genres.add(resultSet.getString("Genre"));
+            } while (resultSet.next());
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Something went wrong while closing connection.");
+                e.printStackTrace();
+            }
+        }
+        return favouriteGenres;
+    }
+
 }

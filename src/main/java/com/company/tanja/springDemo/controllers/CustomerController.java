@@ -2,10 +2,12 @@ package com.company.tanja.springDemo.controllers;
 
 import com.company.tanja.springDemo.data_access.CustomerAPIRequests;
 import com.company.tanja.springDemo.models.Customer;
+import com.company.tanja.springDemo.models.CustomerFavouriteGenre;
 import com.company.tanja.springDemo.models.CustomersPerCountry;
 import com.company.tanja.springDemo.models.CustomersSpendingMax;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @RestController
@@ -42,6 +44,12 @@ public class CustomerController {
     @RequestMapping(value="/api/customers/total_sum", method = RequestMethod.GET)
     public ArrayList<CustomersSpendingMax> countSumSpentPerCustomer(){
         return customerRepository.countSumSpentPerCustomer();
+    }
+
+    // The function returns the customer's most popular genre (or two if both are popular)
+    @RequestMapping(value="/customers/{customerId}/popular/genre", method = RequestMethod.GET)
+    public CustomerFavouriteGenre getFavouriteGenre(@PathVariable int customerId) {
+        return customerRepository.getCustomersFavouriteGenre(customerId);
     }
 
 
