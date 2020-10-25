@@ -204,24 +204,24 @@ public class CustomerAPIRequests {
             logger.log("Connection to SQLite has been established.");
             // Make SQL query
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "SELECT customerId, FirstName, LastName, Name " +
-                            "AS Genre FROM (SELECT Customer.CustomerId, Customer.FirstName, LastName, G.Name, " +
-                            "COUNT(G.Name) AS Number FROM Customer " +
-                            "LEFT JOIN Invoice I on Customer.CustomerId = I.CustomerId " +
-                            "LEFT JOIN InvoiceLine IL on I.InvoiceId = IL.InvoiceId " +
-                            "LEFT JOIN Track T on T.TrackId = IL.TrackId " +
-                            "LEFT JOIN Genre G on G.GenreId = T.GenreId " +
+                    "SELECT customerId, FirstName, LastName, Name AS Genre " +
+                            "FROM (SELECT Customer.CustomerId, Customer.FirstName, LastName, Genre.Name, " +
+                            "COUNT(Genre.Name) AS Number FROM Customer " +
+                            "LEFT JOIN Invoice on Customer.CustomerId = Invoice.CustomerId " +
+                            "LEFT JOIN InvoiceLine on Invoice.InvoiceId = InvoiceLine.InvoiceId " +
+                            "LEFT JOIN Track on Track.TrackId = InvoiceLine.TrackId " +
+                            "LEFT JOIN Genre on Genre.GenreId = Track.GenreId " +
                             "WHERE Customer.CustomerId = ? " +
-                            "GROUP BY G.Name " +
+                            "GROUP BY Genre.Name " +
                             "ORDER BY Number DESC) " +
-                            "WHERE Number = (SELECT MAX(Number) FROM (SELECT G.Name, COUNT(G.Name) " +
+                            "WHERE Number = (SELECT MAX(Number) FROM (SELECT Genre.Name, COUNT(Genre.Name) " +
                             "AS Number FROM Customer " +
-                            "LEFT JOIN Invoice I on Customer.CustomerId = I.CustomerId " +
-                            "LEFT JOIN InvoiceLine IL on I.InvoiceId = IL.InvoiceId " +
-                            "LEFT JOIN Track T on T.TrackId = IL.TrackId " +
-                            "LEFT JOIN Genre G on G.GenreId = T.GenreId " +
+                            "LEFT JOIN Invoice on Customer.CustomerId = Invoice.CustomerId " +
+                            "LEFT JOIN InvoiceLine on Invoice.InvoiceId = InvoiceLine.InvoiceId " +
+                            "LEFT JOIN Track on Track.TrackId = InvoiceLine.TrackId " +
+                            "LEFT JOIN Genre on Genre.GenreId = Track.GenreId " +
                             "WHERE Customer.CustomerId = ? " +
-                            "GROUP BY G.Name " +
+                            "GROUP BY Genre.Name " +
                             "ORDER BY Number DESC))");
             preparedStatement.setInt(1, customerId);
             preparedStatement.setInt(2, customerId);
