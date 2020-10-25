@@ -13,27 +13,9 @@
 <div th:text="${artists}"></div>
 <div th:text="${songs}"></div>
 <div th:text="${genres}"></div>
-<table>
-    <thead>
-    <tr>
-        <th>Song</th>
-        <th>Artist</th>
-        <th>Album</th>
-        <th>Genre</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="song: ${songList}">
-        <td th:text="${song.getSongName()}"></td>
-        <td th:text="${song.getArtistName()}"></td>
-        <td th:text="${song.getAlbumName()}"></td>
-        <td th:text="${song.getGenre()}"></td>
-    </tr>
-    </tbody>
-</table>
 <br>
 <form class="form-inline" action="#" th:action="@{search/(query='searchterm')}">
-    <input class="form-control" type="search" th:name="searchterm" placeholder="Search for tracks" aria-label="Search">
+    <input class="form-control" type="search" th:name="searchterm" placeholder="Search for tracks" aria-label="Search" required>
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
 

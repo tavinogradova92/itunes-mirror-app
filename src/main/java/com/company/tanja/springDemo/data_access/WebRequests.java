@@ -1,7 +1,6 @@
 package com.company.tanja.springDemo.data_access;
 
 import com.company.tanja.springDemo.logging.LogToConsole;
-import com.company.tanja.springDemo.models.Customer;
 import com.company.tanja.springDemo.models.Song;
 
 import java.sql.Connection;
@@ -113,8 +112,8 @@ public class WebRequests {
     }
 
     // creating search request
-    public ArrayList<Song> getSongsFoundList() {
-        ArrayList<Song> getSongsFoundList = new ArrayList<Song>();
+    public ArrayList<Song> getSongsFoundList(String searchQuery) {
+        ArrayList<Song> searchedTracks = new ArrayList<Song>();
         try {
             // Connect to DB
             conn = DriverManager.getConnection(URL);
@@ -122,12 +121,13 @@ public class WebRequests {
 
             // Make SQL query
             PreparedStatement preparedStatement =
-                    conn.prepareStatement("SELECT track.name trackName, album.title albumTitle, artist.name artistName, genre.name genreName FROM track INNER JOIN album ON track.albumId = album.albumId INNER JOIN artist ON album.artistId = artist.artistId INNER JOIN genre ON track.genreID = genre.genreId");
+                    conn.prepareStatement("SELECT track.name AS trackName, album.title AS albumTitle, artist.name AS artistName, genre.name AS genreName FROM track INNER JOIN album ON track.albumId = album.albumId INNER JOIN artist ON album.artistId = artist.artistId INNER JOIN genre ON track.genreID = genre.genreId WHERE track.name LIKE ?");
+            preparedStatement.setString(1, "%" + searchQuery + "%");
             // Execute Query
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                getSongsFoundList.add(
+                searchedTracks.add(
                         new Song(
                                 resultSet.getString("trackName"),
                                 resultSet.getString("artistName"),
@@ -145,6 +145,6 @@ public class WebRequests {
                 logger.log(exception.toString());
             }
         }
-        return getSongsFoundList;
+        return searchedTracks;
     }
 }

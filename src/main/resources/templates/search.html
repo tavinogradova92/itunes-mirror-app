@@ -8,6 +8,28 @@
     <title>Fake iTunes by Tanja - Search Results</title>
 </head>
 <body>
-
+<div th:if="${songList.size() > 0}">
+    <table>
+        <thead>
+        <tr>
+            <th>Song</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Genre</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="track: ${songList}">
+            <td th:text="${track.getSongName()}"></td>
+            <td th:text="${track.getArtistName()}"></td>
+            <td th:text="${track.getAlbumName()}"></td>
+            <td th:text="${track.getGenre()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:else="${songList.size() == 0}">
+    <p th:text='|Sorry, there are no results for "${query}"|'></p>
+</div>
 </body>
 </html>
