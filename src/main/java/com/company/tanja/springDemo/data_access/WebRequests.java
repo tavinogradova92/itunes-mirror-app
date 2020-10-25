@@ -2,6 +2,7 @@ package com.company.tanja.springDemo.data_access;
 
 import com.company.tanja.springDemo.logging.LogToConsole;
 import com.company.tanja.springDemo.models.Customer;
+import com.company.tanja.springDemo.models.Song;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +14,6 @@ public class WebRequests {
 
     private static String URL = "jdbc:sqlite::resource:Chinook_Sqlite.sqlite";
     private static Connection conn = null;
-    public static ArrayList<Customer> customers = new ArrayList<Customer>();
     private LogToConsole logger = new LogToConsole();
 
     // getting five random artists
@@ -110,5 +110,41 @@ public class WebRequests {
             }
         }
         return randomGenres;
+    }
+
+    // creating search request
+    public ArrayList<Song> getSongsFoundList() {
+        ArrayList<Song> getSongsFoundList = new ArrayList<Song>();
+        try {
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            logger.log("Connection to SQLite has been established.");
+
+            // Make SQL query
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement("SELECT track.name trackName, album.title albumTitle, artist.name artistName, genre.name genreName FROM track INNER JOIN album ON track.albumId = album.albumId INNER JOIN artist ON album.artistId = artist.artistId INNER JOIN genre ON track.genreID = genre.genreId");
+            // Execute Query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                getSongsFoundList.add(
+                        new Song(
+                                resultSet.getString("trackName"),
+                                resultSet.getString("artistName"),
+                                resultSet.getString("albumTitle"),
+                                resultSet.getString("genreName")
+                        ));
+            }
+            logger.log("Song list created");
+        } catch (Exception exception) {
+            logger.log(exception.toString());
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception exception) {
+                logger.log(exception.toString());
+            }
+        }
+        return getSongsFoundList;
     }
 }
