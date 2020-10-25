@@ -28,7 +28,7 @@
         </tbody>
     </table>
 </div>
-<div th:else="${songList.size() == 0}">
+<div th:if="${songList.size() == 0}">
     <p th:text='|Sorry, there are no results for "${query}"|'></p>
 </div>
 </body>
