@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset = "ISO-8859-1" />
+    <title>Fake iTunes by Tanja</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link href = "css/styles.css" rel = "stylesheet"/>
-    <title>Fake iTunes by Tanja</title>
 </head>
 
 <body>
+<div class="container">
 <h4>Welcome to Thymeleaf Spring Boot web application</h4>
 <div th:text="${artists}"></div>
 <div th:text="${songs}"></div>
@@ -18,8 +18,9 @@
     <input class="form-control" type="search" th:name="searchterm" placeholder="Search for tracks" aria-label="Search" required>
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
-
-<script th:src="@{/js/bootstrap.min.js}" ></script>
+</div>
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:href="@{/js/bootstrap.js}"></script>
 </body>
 
 </html>
