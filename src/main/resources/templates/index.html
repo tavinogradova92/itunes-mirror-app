@@ -8,17 +8,71 @@
 </head>
 
 <body>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Welcome to Fake iTunes by Tanja!</h1>
+            <p class="lead">This is a platform where you can choose among genres, artists and songs and find a song by its name.</p>
+        </div>
+    </div>
+
+    <div class="container inner-padded">
+        <div class="row justify-content-center align-items-center">
+            <h1 class="display-5">Choose an artist</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <div th:each="artist: ${artists}">
+                            <div th:text="${artist}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container inner-padded">
+        <div class="row justify-content-center align-items-center">
+            <h1 class="display-5">Choose a song</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <div th:each="song: ${songs}">
+                            <div th:text="${song}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container inner-padded">
+        <div class="row justify-content-center align-items-center">
+            <h1 class="display-5">Choose a genre</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <div th:each="genre: ${genres}">
+                            <div th:text="${genre}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="container">
-<h4>Welcome to Thymeleaf Spring Boot web application</h4>
-<div th:text="${artists}"></div>
-<div th:text="${songs}"></div>
-<div th:text="${genres}"></div>
-<br>
 <form class="form-inline" action="#" th:action="@{search/(query='searchterm')}">
     <input class="form-control" type="search" th:name="searchterm" placeholder="Search for tracks" aria-label="Search" required>
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
 </div>
+
 <!-- Placed at the end of the document so the pages load faster -->
 <script th:href="@{/js/bootstrap.js}"></script>
 </body>
