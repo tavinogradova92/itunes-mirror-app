@@ -16,5 +16,7 @@
 
 [Link to Heroku](https://fake-itunes-thymeleaf.herokuapp.com/)
 
+[![Run Postman collection of requests](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e6c71906d6a4549f5ee6)
+
 
  
