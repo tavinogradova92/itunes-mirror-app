@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "ef29a024-6166-437e-8946-63b5a11bca5c",
+		"name": "Fake iTunes API collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Read all customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers"
+					]
+				},
+				"description": "All customers with their ids, first name, last name, country, postal code, phone number and email shown."
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"customerId\": 70,\r\n        \"firstName\": \"Tanja\",\r\n        \"lastName\": \"Vinogradova\",\r\n        \"country\": \"Russia\",\r\n        \"postalCode\": \"141075\",\r\n        \"phone\": \"+79153990805\",\r\n        \"email\": \"tv@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers"
+					]
+				},
+				"description": "Adds new customer to the database "
+			},
+			"response": []
+		},
+		{
+			"name": "Update an existing customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"customerId\": 6,\r\n        \"firstName\": \"Jane\",\r\n        \"lastName\": \"Oustin\",\r\n        \"country\": \"UK\",\r\n        \"postalCode\": \"1111\",\r\n        \"phone\": \"+457584747\",\r\n        \"email\": \"jo@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/customers/6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customers per country",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/customers/country",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers",
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customers who spend the most",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/customers/total_sum",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers",
+						"total_sum"
+					]
+				},
+				"description": "Returns the list of customers showing how much they spent in a descending order"
+			},
+			"response": []
+		},
+		{
+			"name": "Customer's most popular genre(s)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers/15/popular/genre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"15",
+						"popular",
+						"genre"
+					]
+				},
+				"description": "Returns the chosen customer's most popular genre (or two if equal)"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
