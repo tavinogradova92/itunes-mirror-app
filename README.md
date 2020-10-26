@@ -12,7 +12,7 @@
 
 * Demonstrating proper endpoint naming conventions
 
-* SQL queries
+* SQL queries (SQLite Sample Database Chinook used)
 
 [Link to Heroku](https://fake-itunes-thymeleaf.herokuapp.com/)
 
