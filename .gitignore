@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Bootstrap ###
+!**/src/main/resources/bootstrap-4.5.3-dist
